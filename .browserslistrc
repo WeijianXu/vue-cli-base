@@ -1,0 +1,9 @@
+[production]
+> 1%
+last 3 versions
+not ie <= 9
+
+[modern]
+last 2 chrome version
+last 2 firefox version
+not dead

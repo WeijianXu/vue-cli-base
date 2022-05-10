@@ -1,5 +1,28 @@
 module.exports = {
+  // presets: ["@vue/cli-plugin-babel/preset"],
   presets: [
-    '@vue/cli-plugin-babel/preset'
-  ]
-}
+    // web 和 移动端均可访问
+    [
+      '@vue/app',
+      {
+        // 目标环境不需要这些多填充，则会自动排除这些多的填充。
+        useBuiltIns: 'usage',
+        /* polyfills: [
+        'es6.promise',
+        'es6.symbol',
+      ], */
+      },
+    ],
+  ],
+  plugins: [
+    [
+      // 按需加载 view-design
+      'import',
+      {
+        libraryName: 'view-design',
+        libraryDirectory: 'src/components',
+      },
+      'view-design', // 必须设置第三个参数，且不能重名
+    ],
+  ],
+};
