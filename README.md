@@ -3,7 +3,7 @@
 ## Project setup
 
 ```
-yarn install  --registry=http://59.202.38.92:10008
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
