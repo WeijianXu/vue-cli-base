@@ -1,3 +1,25 @@
+
+const plugins = [
+  [
+    'import',
+    {
+      libraryName: 'view-design',
+      libraryDirectory: 'src/components',
+    },
+    'view-design',
+  ],
+  /* [
+    'component',
+    {
+      libraryName: 'element-ui',
+      styleLibraryName: 'theme-chalk',
+    },
+  ], */
+];
+if (['production', 'prod'].includes(process.env.NODE_ENV)) {
+  plugins.push('transform-remove-console');
+}
+
 module.exports = {
   // presets: ["@vue/cli-plugin-babel/preset"],
   presets: [
@@ -14,15 +36,5 @@ module.exports = {
       },
     ],
   ],
-  plugins: [
-    [
-      // 按需加载 view-design
-      'import',
-      {
-        libraryName: 'view-design',
-        libraryDirectory: 'src/components',
-      },
-      'view-design', // 必须设置第三个参数，且不能重名
-    ],
-  ],
+  plugins,
 };

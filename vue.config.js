@@ -3,40 +3,12 @@ const path = require('path');
 const proxyPath = 'https://localhost:8000';
 // vue.config.js
 module.exports = {
-  publicPath: '/panorama/',
+  publicPath: '/',
   devServer: {
     port: '8083',
     https: true, // 默认本地启动 https
     proxy: {
       '^/api': {
-        target: proxyPath,
-        changeOrigin: true,
-        ws: false,
-        headers: {
-          host: proxyPath,
-          origin: proxyPath,
-        },
-      },
-      '^/filerisk': {
-        target: proxyPath,
-        changeOrigin: true,
-        ws: false,
-        headers: {
-          host: proxyPath,
-          origin: proxyPath,
-          referer: proxyPath,
-        },
-      },
-      '^/cas': {
-        target: proxyPath,
-        changeOrigin: true,
-        ws: false,
-        headers: {
-          host: proxyPath,
-          origin: proxyPath,
-        },
-      },
-      '^/usercenter': {
         target: proxyPath,
         changeOrigin: true,
         ws: false,
@@ -68,29 +40,24 @@ module.exports = {
   },
   configureWebpack: (config) => {
     // 子模块路径别名
-    // config.resolve.alias['@zj'] = path.resolve(__dirname, 'src/.zj/src');
     config.resolve.alias = {
       '@': path.resolve('src'),
     };
-
-    // 设置生产版本去掉 console.log debugger 保留 warn
-    if (process.env.NODE_ENV === 'production') {
-      // config.entry.app = ['babel-polyfill', './src/main.js'];
-      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
-      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
-      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
-      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log'];
-    }
+    
+    // 本地开启 source-map
+    config.devtool = 'source-map';
   },
-  chainWebpack: (config) => {
-    // 增加 javascriptEnabled 配置，否则定制 view-design 时，less会报错
-    config.module
-      .rule('less')
-      .oneOf('normal')
-      .use('less-loader')
-      .tap((options) => ({
-        ...options,
-        javascriptEnabled: true,
-      }));
+  css: {
+    loaderOptions: {
+      sass: {
+        sourceMap: false,
+      },
+      less: {
+        sourceMap: false,
+        lessOptions: {
+          javascriptEnabled: true,
+        },
+      },
+    },
   },
 };
