@@ -1,0 +1,13 @@
+{
+  "vetur.validation.template": true,
+  "eslint.validate": [
+    "javascript",
+    "vue"
+  ],
+  "vetur.format.defaultFormatter.js": "prettier-eslint",
+  "vetur.format.defaultFormatter.html": "prettyhtml",
+  "vetur.format.defaultFormatter.ts": "prettier",
+  "eslint.enable": true,
+  "eslint.nodePath": "node_modules/",
+  "editor.formatOnPaste": false
+}
