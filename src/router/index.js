@@ -10,6 +10,11 @@ const routes = [
     name: 'index',
     component: index,
   },
+  {
+    path: '/error/403',
+    name: 'error_403',
+    component: () => import('../views/error/403.vue'),
+  },
 ];
 
 const router = new VueRouter({
